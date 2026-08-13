@@ -161,7 +161,7 @@ function openPainting(imagePath, title) {
 
   const image = document.createElement('img')
 
-  image.src = imagePath
+ image.src = import.meta.env.BASE_URL + imagePath.replace(/^\/+/, '')
 
   image.style.maxWidth = '90vw'
   image.style.maxHeight = '78vh'
