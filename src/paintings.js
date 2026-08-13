@@ -4,7 +4,7 @@ export function addPainting(scene, imagePath, title, x, y, z, width, height) {
 
   const textureLoader = new THREE.TextureLoader()
 
-  textureLoader.load(imagePath, (texture) => {
+ textureLoader.load(import.meta.env.BASE_URL + imagePath.replace(/^\/+/, ''), (texture) => {
 
     // =====================================================
     // TABLEAU
