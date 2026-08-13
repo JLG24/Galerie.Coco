@@ -89,9 +89,8 @@ function checkPaintingClick(clientX, clientY) {
     }
   }
 }
-
-// Clic souris sur Mac
-renderer.domElement.addEventListener('click', (event) => {
+// Clic / toucher sur Mac et iPad
+renderer.domElement.addEventListener('pointerup', (event) => {
 
   checkPaintingClick(
     event.clientX,
@@ -99,25 +98,6 @@ renderer.domElement.addEventListener('click', (event) => {
   )
 
 })
-
-
-// Toucher sur iPad
-renderer.domElement.addEventListener(
-  'touchend',
-  (event) => {
-
-    if (event.changedTouches.length !== 1) return
-
-    const touch = event.changedTouches[0]
-
-    checkPaintingClick(
-      touch.clientX,
-      touch.clientY
-    )
-
-  },
-  { passive: true }
-)
 // ======================================================
 // MUSÉE
 // ======================================================
