@@ -108,7 +108,7 @@ createGalleryLights(scene)
 // ======================================================
 // TABLEAUX - MUR DU FOND
 // ======================================================
-addPainting(scene, "/1.jpeg", "L'arbre de vie (D'après Klimt)", -8, 3.4, -9.7, 3.25, 4)
+addPainting(scene, "/1.jpeg", "L arbre de vie (D'après Klimt)", -8, 3.4, -9.7, 3.25, 4)
 
 //addPainting(scene, "/2.jpeg", "Paysage méditerranéen", -4, 3.4, -9.7, 1.60, 2.00)
 
@@ -120,7 +120,7 @@ addPainting(scene, "/1.jpeg", "L'arbre de vie (D'après Klimt)", -8, 3.4, -9.7, 
 // ======================================================
 // CARTELS
 // ======================================================
-addLabel(scene, "L arbre de vie (D après Klimt)" - Coco", -8, 1.15, -9.7)
+addLabel(scene, "L arbre de vie (D après Klimt) - Coco", -8, 1.15, -9.7)
 
 //addLabel(scene, "Paysage méditerranéen - Coco", -4, 1.15, -9.7)
 
