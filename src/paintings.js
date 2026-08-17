@@ -131,9 +131,8 @@ scene.add(frame)
   })
 }
 
-
 // =========================================================
-// AFFICHAGE GRAND FORMAT
+// AFFICHAGE GRAND FORMAT AVEC ZOOM SUR IPAD
 // =========================================================
 
 function openPainting(imagePath, title) {
@@ -146,7 +145,6 @@ function openPainting(imagePath, title) {
 
   viewer.style.position = 'fixed'
   viewer.style.inset = '0'
-
   viewer.style.background = 'rgba(0,0,0,0.94)'
 
   viewer.style.display = 'flex'
@@ -157,21 +155,103 @@ function openPainting(imagePath, title) {
   viewer.style.zIndex = '2000'
 
   viewer.style.touchAction = 'none'
+  viewer.style.overflow = 'hidden'
 
+
+  // =====================================================
+  // IMAGE
+  // =====================================================
 
   const image = document.createElement('img')
 
- image.src = import.meta.env.BASE_URL + imagePath.replace(/^\/+/, '')
+  image.src =
+    import.meta.env.BASE_URL +
+    imagePath.replace(/^\/+/, '')
 
   image.style.maxWidth = '90vw'
   image.style.maxHeight = '78vh'
 
   image.style.objectFit = 'contain'
-
   image.style.userSelect = 'none'
 
   image.style.touchAction = 'none'
 
+  image.style.transformOrigin = 'center center'
+
+  let scale = 1
+  let startDistance = 0
+  let startScale = 1
+
+
+  // =====================================================
+  // CALCUL DISTANCE ENTRE DEUX DOIGTS
+  // =====================================================
+
+  function getDistance(touch1, touch2) {
+
+    const dx =
+      touch1.clientX - touch2.clientX
+
+    const dy =
+      touch1.clientY - touch2.clientY
+
+    return Math.sqrt(
+      dx * dx + dy * dy
+    )
+  }
+
+
+  // =====================================================
+  // PINCH-TO-ZOOM IPAD
+  // =====================================================
+
+  viewer.addEventListener('touchstart', (event) => {
+
+    if (event.touches.length === 2) {
+
+      startDistance = getDistance(
+        event.touches[0],
+        event.touches[1]
+      )
+
+      startScale = scale
+
+    }
+
+  }, { passive: false })
+
+
+  viewer.addEventListener('touchmove', (event) => {
+
+    if (event.touches.length === 2) {
+
+      event.preventDefault()
+
+      const distance = getDistance(
+        event.touches[0],
+        event.touches[1]
+      )
+
+      scale =
+        startScale *
+        (distance / startDistance)
+
+      // Limites du zoom
+      scale = Math.max(
+        1,
+        Math.min(scale, 4)
+      )
+
+      image.style.transform =
+        `scale(${scale})`
+    }
+
+  }, { passive: false })
+
+
+  // =====================================================
+  // TITRE
+  // =====================================================
 
   const titleElement = document.createElement('div')
 
@@ -184,6 +264,10 @@ function openPainting(imagePath, title) {
   titleElement.style.textAlign = 'center'
 
 
+  // =====================================================
+  // ARTISTE
+  // =====================================================
+
   const artistElement = document.createElement('div')
 
   artistElement.textContent = 'Coco'
@@ -193,6 +277,10 @@ function openPainting(imagePath, title) {
   artistElement.style.fontSize = '17px'
   artistElement.style.marginTop = '6px'
 
+
+  // =====================================================
+  // BOUTON FERMER
+  // =====================================================
 
   const closeButton = document.createElement('button')
 
@@ -208,15 +296,22 @@ function openPainting(imagePath, title) {
   closeButton.style.borderRadius = '50%'
   closeButton.style.border = 'none'
 
-  closeButton.style.background = 'rgba(255,255,255,0.85)'
+  closeButton.style.background =
+    'rgba(255,255,255,0.85)'
 
   closeButton.style.fontSize = '28px'
 
 
   closeButton.addEventListener('click', () => {
+
     viewer.remove()
+
   })
 
+
+  // =====================================================
+  // AJOUT DES ELEMENTS
+  // =====================================================
 
   viewer.appendChild(image)
   viewer.appendChild(titleElement)
