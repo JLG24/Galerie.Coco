@@ -108,27 +108,27 @@ createGalleryLights(scene)
 // ======================================================
 // TABLEAUX - MUR DU FOND
 // ======================================================
-addPainting(scene, "/1.jpeg", "L arbre de vie (D'après Klimt)", -8, 3.4, -9.7, 3.25, 4)
+addPainting(scene, "/1.webp", "L arbre de vie (D'après Klimt)", -8, 3.4, -9.7, 3.25, 4)
 
-//addPainting(scene, "/2.jpeg", "Paysage méditerranéen", -4, 3.4, -9.7, 1.60, 2.00)
+addPainting(scene, "/2.webp", "Paysage méditerranéen", -4, 3.4, -9.7, 1, 2)
 
-//addPainting(scene, "/3.jpeg", "Composition", 4, 3.4, -9.7, 1.00, 1.20)
+addPainting(scene, "/3.webp", "Composition", 4, 3.4, -9.7, 1.2, 0.9)
 
-//addPainting(scene, "/4.jpeg", "Horizon", 7, 3.4, -9.7, 1.20, 2.40)
+addPainting(scene, "/4.webp", "Arearea", 8, 3.4, -9.7, 3, 2.5)
 
 //addPainting(scene, "/5.jpeg", "Souvenir", 11, 3.4, -9.7, 2.00, 1.72)
 // ======================================================
 // CARTELS
 // ======================================================
-addLabel(scene, "L arbre de vie (D après Klimt) - Coco", -8, 1.15, -9.7)
+addLabel(scene, "L arbre de vie (d'après G. Klimt)", -8, 0.8, -9.7)
 
-//addLabel(scene, "Paysage méditerranéen - Coco", -4, 1.15, -9.7)
+addLabel(scene, "Paysage méditerranéen", -4, 1.8, -9.7)
 
-//addLabel(scene, "Composition - Coco", 4, 1.15, -9.70)
+addLabel(scene, "Composition", 4, 2.4, -9.70)
 
-//addLabel(scene, "Horizon - Coco", 7, 1.15, -9.70)
+addLabel(scene, "Arearea (d'après P. Gauguin", 8, 1.5, -9.70)
 
-//addLabel(scene, "Souvenir - Coco", 11, 1.15, -9.70)
+//addLabel(scene, "Souvenir", 11, 1.15, -9.70)
 
 // ======================================================
 // TABLEAU - MUR GAUCHE
