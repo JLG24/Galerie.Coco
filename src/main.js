@@ -108,19 +108,29 @@ createGalleryLights(scene)
 // ======================================================
 // TABLEAUX - MUR DU FOND
 // ======================================================
-addPainting(scene, "/1.webp", "L arbre de vie (D'après Klimt)", -8, 3.4, -9.7, 3.25, 4)
+addPainting(scene, "/ClownBlanc.webp", "Clown blanc", -12, 3.4, -9.7, 2.5, 2.5,"back")
 
-addPainting(scene, "/2.webp", "Paysage méditerranéen", -4, 3.4, -9.7, 1, 2)
+addPainting(scene, "/1.webp", "L arbre de vie (D'après Klimt)", -7.6, 3.4, -9.7, 3.25, 4,"back")
 
-addPainting(scene, "/3.webp", "Composition", 4, 3.4, -9.7, 1.2, 0.9)
+addPainting(scene, "/2.webp", "Paysage méditerranéen", -4, 3.4, -9.7, 1, 2,"back")
 
-addPainting(scene, "/4.webp", "Arearea", 8, 3.4, -9.7, 3, 2.5)
+addPainting(scene, "/3.webp", "Composition", 4, 3.4, -9.7, 1.2, 0.9,"back")
 
-//addPainting(scene, "/5.jpeg", "Souvenir", 11, 3.4, -9.7, 2.00, 1.72)
+addPainting(scene, "/4.webp", "Arearea", 8, 3.4, -9.7, 3, 2.5,"back")
+
+//addPainting(scene, "/4.webp", "Arearea", -9.7, 3.4, -4.7, 3, 2.5,"left")
+
+// ======================================================
+// TABLEAUX - MUR DE GAUCHE
+// ======================================================
+
+addPainting(scene, "/rectangles.webp", "Rectangles", -14.85, 3.4, -4.7, 3, 2.5,"left")
 // ======================================================
 // CARTELS
 // ======================================================
-addLabel(scene, "L arbre de vie (d'après G. Klimt)", -8, 0.8, -9.7)
+addLabel(scene,"Clown blanc",-12,1.4,-9.7)
+
+addLabel(scene, "L arbre de vie (d'après G. Klimt)", -7.6, 0.8, -9.7)
 
 addLabel(scene, "Paysage méditerranéen", -4, 1.8, -9.7)
 
@@ -128,11 +138,14 @@ addLabel(scene, "Composition", 4, 2.4, -9.70)
 
 addLabel(scene, "Arearea (d'après P. Gauguin", 8, 1.5, -9.70)
 
-//addLabel(scene, "Souvenir", 11, 1.15, -9.70)
+
 
 // ======================================================
 // TABLEAU - MUR GAUCHE
 // ======================================================
+addPainting(scene, "/Rectangles.webp", "Rectangles", -14.85, 3.4, -6, 2.05, 1.65, "left")
+
+//addPainting(scene, "/ClownBlanc.webp", "Clown blanc", -12, 3.4, -9.7, 2.5, 2.5)
 
 // ======================================================
 // TABLEAUX - SALLE 2

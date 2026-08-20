@@ -1,135 +1,182 @@
 import * as THREE from 'three'
 
-export function addPainting(scene, imagePath, title, x, y, z, width, height) {
+export function addPainting(
+  scene,
+  imagePath,
+  title,
+  x,
+  y,
+  z,
+  width,
+  height,
+  wall = "back"
+) {
 
   const textureLoader = new THREE.TextureLoader()
 
- textureLoader.load(import.meta.env.BASE_URL + imagePath.replace(/^\/+/, ''), (texture) => {
+  textureLoader.load(
+    import.meta.env.BASE_URL + imagePath.replace(/^\/+/, ''),
+    (texture) => {
 
-    // =====================================================
-    // TABLEAU
-    // =====================================================
+      // =====================================================
+      // GROUPE TABLEAU + CADRE
+      // =====================================================
 
-    const paintingMaterial = new THREE.MeshStandardMaterial({
-      map: texture,
-      roughness: 0.75
-    })
+      const paintingGroup = new THREE.Group()
 
-    const painting = new THREE.Mesh(
-      new THREE.PlaneGeometry(width, height),
-      paintingMaterial
-    )
+      paintingGroup.position.set(x, y, z)
 
-    painting.position.set(x, y, z)
 
-    painting.userData.imagePath = imagePath
+      // =====================================================
+      // ORIENTATION SELON LE MUR
+      // =====================================================
 
-    painting.userData.onClick = () => {
-      openPainting(imagePath, title)
+      if (wall === "back") {
+        paintingGroup.rotation.y = 0
+      }
+
+      if (wall === "left") {
+        paintingGroup.rotation.y = Math.PI / 2
+      }
+
+      if (wall === "right") {
+        paintingGroup.rotation.y = -Math.PI / 2
+      }
+
+
+      // =====================================================
+      // TABLEAU
+      // =====================================================
+
+      const paintingMaterial = new THREE.MeshStandardMaterial({
+        map: texture,
+        roughness: 0.75
+      })
+
+      const painting = new THREE.Mesh(
+        new THREE.PlaneGeometry(width, height),
+        paintingMaterial
+      )
+
+      painting.userData.imagePath = imagePath
+
+      painting.userData.onClick = () => {
+        openPainting(imagePath, title)
+      }
+
+      paintingGroup.add(painting)
+
+
+      // =====================================================
+      // CADRE 3D MOULURÉ
+      // =====================================================
+
+      const frameWidth = 0.16
+      const frameDepth = 0.14
+
+      const frameMaterial = new THREE.MeshStandardMaterial({
+        color: 0x5a381f,
+        roughness: 0.42,
+        metalness: 0.05
+      })
+
+
+      // Forme extérieure
+
+      const shape = new THREE.Shape()
+
+      shape.moveTo(
+        -width / 2 - frameWidth,
+        -height / 2 - frameWidth
+      )
+
+      shape.lineTo(
+        width / 2 + frameWidth,
+        -height / 2 - frameWidth
+      )
+
+      shape.lineTo(
+        width / 2 + frameWidth,
+        height / 2 + frameWidth
+      )
+
+      shape.lineTo(
+        -width / 2 - frameWidth,
+        height / 2 + frameWidth
+      )
+
+      shape.closePath()
+
+
+      // Ouverture centrale
+
+      const hole = new THREE.Path()
+
+      hole.moveTo(
+        -width / 2,
+        -height / 2
+      )
+
+      hole.lineTo(
+        width / 2,
+        -height / 2
+      )
+
+      hole.lineTo(
+        width / 2,
+        height / 2
+      )
+
+      hole.lineTo(
+        -width / 2,
+        height / 2
+      )
+
+      hole.closePath()
+
+      shape.holes.push(hole)
+
+
+      // Volume 3D
+
+      const frameGeometry = new THREE.ExtrudeGeometry(
+        shape,
+        {
+          depth: frameDepth,
+          bevelEnabled: true,
+          bevelThickness: 0.035,
+          bevelSize: 0.035,
+          bevelSegments: 2
+        }
+      )
+
+      const frame = new THREE.Mesh(
+        frameGeometry,
+        frameMaterial
+      )
+
+      frame.position.set(
+        0,
+        0,
+        -frameDepth / 2
+      )
+
+      frame.castShadow = true
+      frame.receiveShadow = true
+
+      paintingGroup.add(frame)
+
+
+      // =====================================================
+      // AJOUT DU GROUPE À LA SALLE
+      // =====================================================
+
+      scene.add(paintingGroup)
+
     }
-
-    scene.add(painting)
-
-// =====================================================
-// CADRE 3D MOULURÉ
-// =====================================================
-
-const frameWidth = 0.16
-const frameDepth = 0.14
-
-const frameMaterial = new THREE.MeshStandardMaterial({
-  color: 0x5a381f,
-  roughness: 0.42,
-  metalness: 0.05
-})
-
-
-// Forme extérieure du cadre
-const shape = new THREE.Shape()
-
-shape.moveTo(
-  -width / 2 - frameWidth,
-  -height / 2 - frameWidth
-)
-
-shape.lineTo(
-  width / 2 + frameWidth,
-  -height / 2 - frameWidth
-)
-
-shape.lineTo(
-  width / 2 + frameWidth,
-  height / 2 + frameWidth
-)
-
-shape.lineTo(
-  -width / 2 - frameWidth,
-  height / 2 + frameWidth
-)
-
-shape.closePath()
-
-
-// Ouverture centrale
-const hole = new THREE.Path()
-
-hole.moveTo(
-  -width / 2,
-  -height / 2
-)
-
-hole.lineTo(
-  width / 2,
-  -height / 2
-)
-
-hole.lineTo(
-  width / 2,
-  height / 2
-)
-
-hole.lineTo(
-  -width / 2,
-  height / 2
-)
-
-hole.closePath()
-
-shape.holes.push(hole)
-
-
-// Création du volume 3D
-const frameGeometry = new THREE.ExtrudeGeometry(
-  shape,
-  {
-    depth: frameDepth,
-    bevelEnabled: true,
-    bevelThickness: 0.035,
-    bevelSize: 0.035,
-    bevelSegments: 2
-  }
-)
-
-const frame = new THREE.Mesh(
-  frameGeometry,
-  frameMaterial
-)
-
-frame.position.set(
-  x,
-  y,
-  z - frameDepth / 2
-)
-
-frame.castShadow = true
-frame.receiveShadow = true
-
-scene.add(frame)
-
-
-
-  })
+  )
 }
+
 
 // =========================================================
 // AFFICHAGE GRAND FORMAT AVEC ZOOM SUR IPAD
