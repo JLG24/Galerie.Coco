@@ -112,7 +112,7 @@ addPainting(scene, "/ClownBlanc.webp", "Clown blanc", -12, 3.4, -9.7, 2.5, 2.5,"
 
 addPainting(scene, "/1.webp", "L arbre de vie (D'après Klimt)", -7.6, 3.4, -9.7, 3.25, 4,"back")
 
-addPainting(scene, "/2.webp", "Paysage méditerranéen", -4, 3.4, -9.7, 1, 2,"back")
+addPainting(scene, "/2.webp", "Place de village", -4, 3.4, -9.7, 1, 2,"back")
 
 addPainting(scene, "/3.webp", "Composition", 4, 3.4, -9.7, 1.2, 0.9,"back")
 
@@ -132,7 +132,7 @@ addLabel(scene,"Clown blanc",-12,1.4,-9.7)
 
 addLabel(scene, "L arbre de vie (d'après G. Klimt)", -7.6, 0.8, -9.7)
 
-addLabel(scene, "Paysage méditerranéen", -4, 1.8, -9.7)
+addLabel(scene, "Place de village", -4, 1.8, -9.7)
 
 addLabel(scene, "Composition", 4, 2.4, -9.70)
 
