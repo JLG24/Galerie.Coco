@@ -124,7 +124,7 @@ addPainting(scene, "/4.webp", "Arearea", 8, 3.4, -9.7, 3, 2.5,"back")
 // TABLEAUX - MUR DE GAUCHE
 // ======================================================
 
-addPainting(scene, "/rectangles.webp", "Rectangles", -14.85, 3.4, -4.7, 3, 2.5,"left")
+//addPainting(scene, "/nuee.webp", "Nuée de papillons", -14.85, 3.4, -4.7, 3, 2.5,"left")
 // ======================================================
 // CARTELS
 // ======================================================
