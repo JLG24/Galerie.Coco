@@ -1,5 +1,6 @@
 import * as THREE from 'three'
-export function addLabel(scene, text, x, y, z) {
+
+export function addLabel(scene, text, x, y, z, wall = "back") {
 
     const canvas = document.createElement('canvas')
     const context = canvas.getContext('2d')
@@ -16,21 +17,43 @@ export function addLabel(scene, text, x, y, z) {
     context.font = "34px Arial"
     context.textAlign = "center"
     context.textBaseline = "middle"
-    context.fillText(text, canvas.width / 2, canvas.height / 2)
+    context.fillText(
+        text,
+        canvas.width / 2,
+        canvas.height / 2
+    )
 
     const texture = new THREE.CanvasTexture(canvas)
     texture.needsUpdate = true
 
     const material = new THREE.MeshBasicMaterial({
         map: texture,
-        transparent: true
+        transparent: true,
+        side: THREE.DoubleSide
     })
 
-   const label = new THREE.Mesh(
-    new THREE.PlaneGeometry(2.2, 0.32),
-    material
-)
+    const label = new THREE.Mesh(
+        new THREE.PlaneGeometry(2.2, 0.32),
+        material
+    )
+
     label.position.set(x, y, z)
+
+    // =====================================================
+    // ORIENTATION DU CARTEL
+    // =====================================================
+
+    if (wall === "back") {
+        label.rotation.y = 0
+    }
+
+    if (wall === "left") {
+        label.rotation.y = Math.PI / 2
+    }
+
+    if (wall === "right") {
+        label.rotation.y = -Math.PI / 2
+    }
 
     scene.add(label)
 }

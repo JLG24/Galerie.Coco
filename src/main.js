@@ -109,43 +109,49 @@ createGalleryLights(scene)
 // TABLEAUX - MUR DU FOND
 // ======================================================
 addPainting(scene, "/ClownBlanc.webp", "Clown blanc", -12, 3.4, -9.7, 2.5, 2.5,"back")
-
 addPainting(scene, "/1.webp", "L arbre de vie (D'après Klimt)", -7.6, 3.4, -9.7, 3.25, 4,"back")
-
 addPainting(scene, "/2.webp", "Place de village", -4, 3.4, -9.7, 1, 2,"back")
-
 addPainting(scene, "/3.webp", "Composition", 4, 3.4, -9.7, 1.2, 0.9,"back")
-
 addPainting(scene, "/4.webp", "Arearea", 8, 3.4, -9.7, 3, 2.5,"back")
-
-//addPainting(scene, "/4.webp", "Arearea", -9.7, 3.4, -4.7, 3, 2.5,"left")
 
 // ======================================================
 // TABLEAUX - MUR DE GAUCHE
 // ======================================================
 
-//addPainting(scene, "/nuee.webp", "Nuée de papillons", -14.85, 3.4, -4.7, 3, 2.5,"left")
+addPainting(scene, "/nuee.webp", "Nuée de papillons", -14.85, 3.4, -5.6, 2.05, 1.65,"left")
+addPainting(scene, "/Nateis1.webp", "Nateis bleu", -14.85, 3.4, -1.8, 2, 2.5,"left")
+addPainting(scene, "/lumiere.webp", "Lumiere", -14.85, 3.4, 1.6, 1.2, 1.5,"left")
+
+
+// ======================================================
+// TABLEAUX - MUR DE DROITE
+// ======================================================
+
+addPainting(scene, "/tempete.webp", "Tempête", 14.85, 3.4, -5.6, 1.5, 1,"right")
+addPainting(scene, "/incendie.webp", "Incendie", 14.85, 3.4, -1.8, 0.8, 1.1,"right")
+addPainting(scene, "/papillon.webp", "Papillon", 14.85, 4, 2.8, 4, 5,"right")
 // ======================================================
 // CARTELS
 // ======================================================
-addLabel(scene,"Clown blanc",-12,1.4,-9.7)
-
-addLabel(scene, "L arbre de vie (d'après G. Klimt)", -7.6, 0.8, -9.7)
-
-addLabel(scene, "Place de village", -4, 1.8, -9.7)
-
-addLabel(scene, "Composition", 4, 2.4, -9.70)
-
-addLabel(scene, "Arearea (d'après P. Gauguin", 8, 1.5, -9.70)
-
-
+addLabel(scene,"Clown blanc",-12,1.4,-9.7,"back")
+addLabel(scene, "L arbre de vie (d'après G. Klimt)", -7.6, 0.8, -9.7,"back")
+addLabel(scene, "Place de village", -4, 1.8, -9.7,"back")
+addLabel(scene, "Composition", 4, 2.4, -9.70,"back")
+addLabel(scene, "Arearea (d'après P. Gauguin", 8, 1.5, -9.70,"back")
 
 // ======================================================
-// TABLEAU - MUR GAUCHE
+// CARTELS MUR DE GAUCHE
 // ======================================================
-addPainting(scene, "/Rectangles.webp", "Rectangles", -14.85, 3.4, -6, 2.05, 1.65, "left")
+addLabel(scene, "Nuée de papillons", -14.85,1.8,-5.6,"left")
+addLabel(scene, "Nateis bleu", -14.85,1.6,-1.8,"left")
+addLabel(scene, "Lumière", -14.85, 1.8, 1.6,"left")
 
-//addPainting(scene, "/ClownBlanc.webp", "Clown blanc", -12, 3.4, -9.7, 2.5, 2.5)
+// ======================================================
+// CARTELS MUR DE DROITE
+// ======================================================
+addLabel(scene, "Tempête", 14.85,2.3,-5.6,"right")
+addLabel(scene, "Incendie", 14.85,2.2,-1.8,"right")
+addLabel(scene, "Lumière", 14.85, 1, 2.8,"right")
 
 // ======================================================
 // TABLEAUX - SALLE 2
@@ -163,7 +169,7 @@ addPainting(scene, "/Rectangles.webp", "Rectangles", -14.85, 3.4, -6, 2.05, 1.65
 // ======================================================
 // POSITION DE DÉPART
 // ======================================================
-camera.position.set(0,1.7,7)
+camera.position.set(0,2.5,7)
 
 
 // ======================================================
