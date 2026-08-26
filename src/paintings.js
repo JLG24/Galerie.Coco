@@ -48,15 +48,18 @@ export function addPainting(
       // TABLEAU
       // =====================================================
 
-      const paintingMaterial = new THREE.MeshStandardMaterial({
-        map: texture,
-        roughness: 0.75
-      })
+        texture.colorSpace = THREE.SRGBColorSpace
 
-      const painting = new THREE.Mesh(
-        new THREE.PlaneGeometry(width, height),
-        paintingMaterial
-      )
+        const paintingMaterial = new THREE.MeshBasicMaterial({
+            map: texture
+        })
+
+        const painting = new THREE.Mesh(
+            new THREE.PlaneGeometry(width, height),
+            paintingMaterial
+        )
+
+      painting.position.z=0.008
 
       painting.userData.imagePath = imagePath
 
@@ -71,13 +74,13 @@ export function addPainting(
       // CADRE 3D MOULURÉ
       // =====================================================
 
-      const frameWidth = 0.16
-      const frameDepth = 0.14
+      const frameWidth = 0.12
+      const frameDepth = 0.055
 
       const frameMaterial = new THREE.MeshStandardMaterial({
-        color: 0x5a381f,
-        roughness: 0.42,
-        metalness: 0.05
+        color: 0x4c2e1b,
+        roughness: 0.52,
+        metalness: 0
       })
 
 
@@ -144,8 +147,8 @@ export function addPainting(
         {
           depth: frameDepth,
           bevelEnabled: true,
-          bevelThickness: 0.035,
-          bevelSize: 0.035,
+          bevelThickness: 0.014,
+          bevelSize: 0.012,
           bevelSegments: 2
         }
       )
@@ -158,7 +161,7 @@ export function addPainting(
       frame.position.set(
         0,
         0,
-        -frameDepth / 2
+        0
       )
 
       frame.castShadow = true
@@ -172,7 +175,7 @@ export function addPainting(
       // =====================================================
 
       scene.add(paintingGroup)
-
+ap
     }
   )
 }
@@ -317,7 +320,7 @@ function openPainting(imagePath, title) {
 
   const artistElement = document.createElement('div')
 
-  artistElement.textContent = 'Coco'
+  artistElement.textContent = ''
 
   artistElement.style.color = '#cccccc'
   artistElement.style.fontFamily = 'Arial, sans-serif'

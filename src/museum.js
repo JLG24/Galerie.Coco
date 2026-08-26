@@ -13,21 +13,155 @@ export function createMuseum(scene) {
 
 
   // ======================================================
+// TEXTURE PARQUET BOIS CLAIR
+// ======================================================
+
+
+function createWoodTexture() {
+
+  const canvas = document.createElement('canvas')
+  canvas.width = 1024
+  canvas.height = 1024
+
+  const ctx = canvas.getContext('2d')
+
+  // Fond bois clair
+  ctx.fillStyle = '#c8bda5'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+  // ====================================================
+  // GRANDES PLANCHES
+  // ====================================================
+
+  const plankWidth = 320
+
+  for (let x = 0; x <= canvas.width; x += plankWidth) {
+
+    ctx.strokeStyle = 'rgba(80, 65, 45, 0.025)'
+    ctx.lineWidth = 2
+
+    ctx.beginPath()
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, canvas.height)
+    ctx.stroke()
+  }
+
+  // ====================================================
+  // VEINES TRÈS DISCRÈTES
+  // ====================================================
+
+  for (let x = 0; x < canvas.width; x += plankWidth) {
+
+    for (let i = 0; i < 2; i++) {
+
+      const offset =
+        30 + Math.random() * (plankWidth - 60)
+
+      ctx.strokeStyle = 'rgba(90, 75, 55, 0.025)'
+      ctx.lineWidth = 2
+
+      ctx.beginPath()
+
+      ctx.moveTo(
+        x + offset,
+        0
+      )
+
+      for (let y = 0; y < canvas.height; y += 160) {
+
+        ctx.lineTo(
+          x + offset + (Math.random() - 0.5) * 10,
+          y + 160
+        )
+      }
+
+      ctx.stroke()
+    }
+  }
+
+  const texture = new THREE.CanvasTexture(canvas)
+
+  texture.colorSpace = THREE.SRGBColorSpace
+
+  texture.wrapS = THREE.RepeatWrapping
+  texture.wrapT = THREE.RepeatWrapping
+
+  // Peu de répétitions = grandes lames
+  texture.repeat.set(2, 1)
+
+  return texture
+}
+
+const woodTexture = createWoodTexture()
+
+function createWallTexture() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 1024
+  canvas.height = 1024
+
+  const ctx = canvas.getContext('2d')
+
+  ctx.fillStyle = '#d8d5cc'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+  // Micro-variations de l’enduit
+  for (let i = 0; i < 2400; i++) {
+    const shade = Math.random() > 0.5
+      ? 'rgba(255,255,255,0.018)'
+      : 'rgba(85,78,67,0.014)'
+
+    ctx.fillStyle = shade
+
+    const size = 1 + Math.random() * 3
+
+    ctx.fillRect(
+      Math.random() * canvas.width,
+      Math.random() * canvas.height,
+      size,
+      size
+    )
+  }
+
+  // Nuances larges presque imperceptibles
+  for (let i = 0; i < 55; i++) {
+    ctx.fillStyle = 'rgba(255,255,255,0.012)'
+    ctx.beginPath()
+    ctx.arc(
+      Math.random() * canvas.width,
+      Math.random() * canvas.height,
+      20 + Math.random() * 70,
+      0,
+      Math.PI * 2
+    )
+    ctx.fill()
+  }
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+
+  return texture
+}
+
+const wallTexture = createWallTexture()
+
+  // ======================================================
   // MATÉRIAUX
   // ======================================================
 
-  const wallMaterial = new THREE.MeshStandardMaterial({
-    color: 0xd8d5cc,
-    roughness: 0.8
-  })
+ const wallMaterial = new THREE.MeshStandardMaterial({
+  map: wallTexture,
+  color: 0xffffff,
+  roughness: 0.88
+})
 
-  const floorMaterial = new THREE.MeshStandardMaterial({
-    color: 0xb9aa88,
-    roughness: 0.9
-  })
+ const floorMaterial = new THREE.MeshStandardMaterial({
+  map: woodTexture,
+  color: 0xffffff,
+  roughness: 0.85
+})
 
   const ceilingMaterial = new THREE.MeshStandardMaterial({
-    color: 0xbdbdbd,
+    color: 0xd6d2c9,
     roughness: 1
   })
 
